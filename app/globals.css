@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-primary: 0 102 204;
+    --color-primary-dark: 0 82 163;
+    --color-primary-light: 51 133 214;
+    --color-secondary: 255 107 53;
+    --color-secondary-dark: 229 82 44;
+    --color-secondary-light: 255 138 91;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    @apply bg-primary text-white;
+  }
+}
