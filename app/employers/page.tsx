@@ -172,10 +172,9 @@ export default function EmployersPage() {
     >
       {/* Hero Section */}
       <Hero
-        variant="simple"
         layout="centered"
-        title="Professional Warehouse & Logistics Recruitment"
-        subtitle="Specialist recruitment services for Berkshire employers. Find the right warehouse and logistics staff with our proven process and 3-month guarantee."
+        headline="Professional Warehouse & Logistics Recruitment"
+        subheadline="Specialist recruitment services for Berkshire employers. Find the right warehouse and logistics staff with our proven process and 3-month guarantee."
         primaryCta={{
           text: 'Discuss Your Requirements',
           href: '/contact',
@@ -211,7 +210,7 @@ export default function EmployersPage() {
               <Card key={index} variant="default" className="h-full">
                 <div className="flex items-start gap-4 mb-6">
                   <div className="flex-shrink-0 p-3 bg-primary/10 rounded-lg">
-                    <Icon name={service.icon as any} size="lg" color="primary" />
+                    <Icon name={service.icon as 'users' | 'clock' | 'trending-up' | 'briefcase'} size="lg" color="accent" />
                   </div>
                   <div className="flex-1">
                     <Heading level={3} size="lg" className="mb-2">
@@ -236,7 +235,7 @@ export default function EmployersPage() {
           </div>
 
           <div className="text-center mt-12">
-            <Button href="/contact" variant="primary" size="lg">
+            <Button href="/contact" variant="primary" size="large">
               Get Started Today
             </Button>
           </div>
@@ -260,7 +259,7 @@ export default function EmployersPage() {
               <div key={index} className="text-center">
                 <div className="flex justify-center mb-4">
                   <div className="p-4 bg-primary/10 rounded-full">
-                    <Icon name={benefit.icon as any} size="xl" color="primary" />
+                    <Icon name={benefit.icon as 'target' | 'map-pin' | 'shield-check' | 'clock' | 'pound-sterling' | 'headphones'} size="xl" color="accent" />
                   </div>
                 </div>
                 <Heading level={3} size="base" className="mb-2">
@@ -301,7 +300,7 @@ export default function EmployersPage() {
                 <Text size="sm" color="muted" className="mb-3">
                   {step.description}
                 </Text>
-                <Text size="xs" color="primary" weight="medium">
+                <Text size="xs" color="accent" weight="medium">
                   Timeline: {step.duration}
                 </Text>
               </Card>
@@ -312,7 +311,7 @@ export default function EmployersPage() {
             <Text className="mb-6">
               Ready to streamline your recruitment process?
             </Text>
-            <Button href="/contact" variant="outline" size="lg">
+            <Button href="/contact" variant="outline" size="large">
               Start the Process
             </Button>
           </div>
@@ -379,7 +378,7 @@ export default function EmployersPage() {
                 Temporary Staff
               </Heading>
               <div className="mb-4">
-                <Text size="2xl" weight="bold" color="primary">
+                <Text size="xl" weight="bold" color="accent">
                   £2-4
                 </Text>
                 <Text size="sm" color="muted">per hour markup</Text>
@@ -405,7 +404,7 @@ export default function EmployersPage() {
                 Permanent Staff
               </Heading>
               <div className="mb-4">
-                <Text size="2xl" weight="bold" color="primary">
+                <Text size="xl" weight="bold" color="accent">
                   12-18%
                 </Text>
                 <Text size="sm" color="muted">of annual salary</Text>
@@ -431,7 +430,7 @@ export default function EmployersPage() {
                 Temp-to-Perm
               </Heading>
               <div className="mb-4">
-                <Text size="2xl" weight="bold" color="primary">
+                <Text size="xl" weight="bold" color="accent">
                   8-12%
                 </Text>
                 <Text size="sm" color="muted">conversion fee</Text>
@@ -464,19 +463,19 @@ export default function EmployersPage() {
       {/* Final CTA */}
       <section className="py-16 bg-primary text-white" aria-labelledby="cta-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Heading level={2} size="2xl" color="inverse" className="mb-4" id="cta-heading">
+          <Heading level={2} size="2xl" className="mb-4 text-white" id="cta-heading">
             Ready to Solve Your Staffing Challenges?
           </Heading>
           <Text size="lg" color="inverse" className="mb-8 opacity-90">
-            Let's discuss how we can help you find the right warehouse and logistics staff. 
+            Let&apos;s discuss how we can help you find the right warehouse and logistics staff. 
             No obligation consultation with our experienced team.
           </Text>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button href="/contact" variant="secondary" size="lg">
+            <Button href="/contact" variant="secondary" size="large">
               Book a Consultation
             </Button>
-            <Button href="tel:+441234567890" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
+            <Button href="tel:+441234567890" variant="outline" size="large" className="border-white text-white hover:bg-white hover:text-primary">
               Call Now
             </Button>
           </div>

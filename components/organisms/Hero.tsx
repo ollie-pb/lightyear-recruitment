@@ -27,7 +27,7 @@ export interface HeroProps extends React.HTMLAttributes<HTMLElement> {
     text: string
     href?: string
     onClick?: () => void
-    variant?: 'outline' | 'ghost'
+    variant?: 'outline' | 'secondary'
   }
   
   // Background
@@ -142,14 +142,14 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
         await onFormSubmit?.(formData)
         setFormData({ name: '', email: '', phone: '' })
         setFormErrors({})
-      } catch (error) {
+      } catch {
         setFormErrors({ submit: 'Something went wrong. Please try again.' })
       } finally {
         setIsSubmitting(false)
       }
     }
 
-    const handleInputChange = (field: string) => (value: string | number) => {
+    const handleInputChange = (field: string) => (value: string | number | File | File[]) => {
       setFormData(prev => ({ ...prev, [field]: value as string }))
       if (formErrors[field]) {
         setFormErrors(prev => ({ ...prev, [field]: '' }))
@@ -234,7 +234,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                     {primaryCta && (
                       <Button
                         variant={primaryCta.variant || 'primary'}
-                        size="lg"
+                        size="large"
                         href={primaryCta.href}
                         onClick={primaryCta.onClick}
                         className="min-w-[200px]"
@@ -247,7 +247,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                     {secondaryCta && (
                       <Button
                         variant={secondaryCta.variant || 'outline'}
-                        size="lg"
+                        size="large"
                         href={secondaryCta.href}
                         onClick={secondaryCta.onClick}
                         className="min-w-[200px]"
@@ -266,10 +266,10 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                       <div key={index} className="text-center">
                         {stat.icon && (
                           <div className="mb-2 flex justify-center">
-                            {React.isValidElement(stat.icon) ? stat.icon : <Icon src={stat.icon as any} size="lg" color="accent" />}
+                            {React.isValidElement(stat.icon) ? stat.icon : <Icon src={stat.icon as string | React.ComponentType<React.SVGProps<SVGSVGElement>>} size="lg" color="accent" />}
                           </div>
                         )}
-                        <Text size="2xl" weight="bold" className="block">
+                        <Text size="xl" weight="bold" className="block">
                           {stat.value}
                         </Text>
                         <Text size="sm" color="muted">
@@ -333,7 +333,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                   {primaryCta && (
                     <Button
                       variant={primaryCta.variant || 'primary'}
-                      size="lg"
+                      size="large"
                       href={primaryCta.href}
                       onClick={primaryCta.onClick}
                       className="min-w-[200px]"
@@ -346,7 +346,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                   {secondaryCta && (
                     <Button
                       variant={secondaryCta.variant || 'outline'}
-                      size="lg"
+                      size="large"
                       href={secondaryCta.href}
                       onClick={secondaryCta.onClick}
                       className="min-w-[200px]"
@@ -365,10 +365,10 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                     <div key={index} className="text-center">
                       {stat.icon && (
                         <div className="mb-2 flex justify-center">
-                          {React.isValidElement(stat.icon) ? stat.icon : <Icon src={stat.icon as any} size="lg" color="accent" />}
+                          {React.isValidElement(stat.icon) ? stat.icon : <Icon src={stat.icon as string | React.ComponentType<React.SVGProps<SVGSVGElement>>} size="lg" color="accent" />}
                         </div>
                       )}
-                      <Text size="2xl" weight="bold" className="block">
+                      <Text size="xl" weight="bold" className="block">
                         {stat.value}
                       </Text>
                       <Text size="sm" color="muted">
@@ -436,7 +436,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
                     <Button
                       type="submit"
                       variant="primary"
-                      size="lg"
+                      size="large"
                       disabled={isSubmitting}
                       className="w-full"
                       data-testid="hero-form-submit"
@@ -454,7 +454,7 @@ const Hero = forwardRef<HTMLElement, HeroProps>(
             <div className="mt-12 max-w-2xl mx-auto text-center" data-testid="hero-testimonial">
               <Card className="p-6">
                 <Text size="lg" className="mb-4 italic">
-                  "{testimonial.text}"
+                  &ldquo;{testimonial.text}&rdquo;
                 </Text>
                 
                 <div className="flex items-center justify-center gap-4">

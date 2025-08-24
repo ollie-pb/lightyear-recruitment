@@ -86,7 +86,7 @@ export default function ContactPage() {
         preferredContact: 'email',
         consent: false
       })
-    } catch (error) {
+    } catch {
       setFormStatus('error')
     }
   }
@@ -192,10 +192,9 @@ export default function ContactPage() {
     >
       {/* Hero Section */}
       <Hero
-        variant="simple"
         layout="centered"
-        title="Get in Touch"
-        subtitle="Ready to find your perfect warehouse job or hire quality staff? We're here to help with personal service and expert advice."
+        headline="Get in Touch"
+        subheadline="Ready to find your perfect warehouse job or hire quality staff? We're here to help with personal service and expert advice."
         primaryCta={{
           text: 'Register for Jobs',
           href: 'https://registration.recruso.co.uk/Form/Worker/RdcgtU2Ti03C3gbg7Q6uWoxra98ucBoAnSg21MBO',
@@ -223,22 +222,22 @@ export default function ContactPage() {
                 Send Us a Message
               </Heading>
               <Text color="muted" className="mb-8">
-                Use the form below to get in touch. We'll respond within 2 hours during business hours.
+                Use the form below to get in touch. We&apos;ll respond within 2 hours during business hours.
               </Text>
 
               {formStatus === 'success' ? (
                 <Card variant="default" className="p-6 text-center">
-                  <Icon name="check-circle" size="2xl" color="success" className="mx-auto mb-4" />
+                  <Icon name="check-circle" size="xl" color="success" className="mx-auto mb-4" />
                   <Heading level={3} size="lg" className="mb-2">
                     Message Sent Successfully!
                   </Heading>
                   <Text color="muted" className="mb-4">
-                    Thank you for your enquiry. We'll get back to you within 2 hours during business hours.
+                    Thank you for your enquiry. We&apos;ll get back to you within 2 hours during business hours.
                   </Text>
                   <Button
                     onClick={() => setFormStatus('idle')}
                     variant="outline"
-                    size="sm"
+                    size="small"
                   >
                     Send Another Message
                   </Button>
@@ -251,7 +250,7 @@ export default function ContactPage() {
                       label="Your Name"
                       type="text"
                       value={formData.name}
-                      onChange={handleInputChange}
+                      onChange={(value) => handleInputChange('name', value as string)}
                       error={formErrors.name}
                       required
                       placeholder="e.g. John Smith"
@@ -262,7 +261,7 @@ export default function ContactPage() {
                       label="Email Address"
                       type="email"
                       value={formData.email}
-                      onChange={handleInputChange}
+                      onChange={(value) => handleInputChange('email', value as string)}
                       error={formErrors.email}
                       required
                       placeholder="e.g. john@example.com"
@@ -275,7 +274,7 @@ export default function ContactPage() {
                       label="Phone Number"
                       type="tel"
                       value={formData.phone}
-                      onChange={handleInputChange}
+                      onChange={(value) => handleInputChange('phone', value as string)}
                       placeholder="e.g. 07123 456789"
                       helpText="Optional - for quicker response"
                     />
@@ -285,7 +284,7 @@ export default function ContactPage() {
                       label="Company Name"
                       type="text"
                       value={formData.company}
-                      onChange={handleInputChange}
+                      onChange={(value) => handleInputChange('company', value as string)}
                       placeholder="e.g. ABC Logistics Ltd"
                       helpText="Required for employer enquiries"
                     />
@@ -296,12 +295,12 @@ export default function ContactPage() {
                     label="Type of Enquiry"
                     type="select"
                     value={formData.enquiryType}
-                    onChange={handleInputChange}
+                    onChange={(value) => handleInputChange('enquiryType', value as string)}
                     error={formErrors.enquiryType}
                     required
                     options={[
                       { value: '', label: 'Please select...' },
-                      { value: 'candidate', label: 'I\'m looking for a job' },
+                      { value: 'candidate', label: 'I&apos;m looking for a job' },
                       { value: 'employer-permanent', label: 'I need to hire permanent staff' },
                       { value: 'employer-temporary', label: 'I need temporary staff' },
                       { value: 'employer-general', label: 'General employer enquiry' },
@@ -314,7 +313,7 @@ export default function ContactPage() {
                     label="Preferred Contact Method"
                     type="select"
                     value={formData.preferredContact}
-                    onChange={handleInputChange}
+                    onChange={(value) => handleInputChange('preferredContact', value as string)}
                     options={[
                       { value: 'email', label: 'Email' },
                       { value: 'phone', label: 'Phone call' },
@@ -327,29 +326,44 @@ export default function ContactPage() {
                     label="Your Message"
                     type="textarea"
                     value={formData.message}
-                    onChange={handleInputChange}
+                    onChange={(value) => handleInputChange('message', value as string)}
                     error={formErrors.message}
                     required
-                    placeholder="Please tell us about your requirements, experience, or what you'd like to discuss..."
+                    placeholder="Please tell us about your requirements, experience, or what you&apos;d like to discuss..."
                     rows={5}
                   />
 
                   <div className="space-y-4">
-                    <FormGroup
-                      name="consent"
-                      label="I agree to the privacy policy and terms of service"
-                      type="checkbox"
-                      value={formData.consent}
-                      onChange={handleInputChange}
-                      error={formErrors.consent}
-                      required
-                      helpText="We'll only use your information to respond to your enquiry and provide relevant updates."
-                    />
+                    <div className="space-y-2">
+                      <label className="flex items-start gap-3 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          name="consent"
+                          checked={formData.consent}
+                          onChange={(e) => handleInputChange('consent', e.target.checked)}
+                          className="mt-1 h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded"
+                          required
+                        />
+                        <div className="flex-1">
+                          <Text size="sm" className="leading-5">
+                            I agree to the privacy policy and terms of service <span className="text-red-500">*</span>
+                          </Text>
+                          <Text size="xs" color="muted" className="mt-1">
+                            We&apos;ll only use your information to respond to your enquiry and provide relevant updates.
+                          </Text>
+                        </div>
+                      </label>
+                      {formErrors.consent && (
+                        <Text size="sm" color="error" role="alert" aria-live="polite">
+                          {formErrors.consent}
+                        </Text>
+                      )}
+                    </div>
 
                     <Button
                       type="submit"
                       variant="primary"
-                      size="lg"
+                      size="large"
                       disabled={formStatus === 'submitting'}
                       className="w-full"
                     >
@@ -377,7 +391,7 @@ export default function ContactPage() {
                   <Card key={index} variant="default" className="p-6">
                     <div className="flex items-start gap-4">
                       <div className="flex-shrink-0 p-3 bg-primary/10 rounded-lg">
-                        <Icon name={method.icon as any} size="lg" color="primary" />
+                        <Icon name={method.icon as 'phone' | 'email' | 'map-pin' | 'linkedin'} size="lg" color="accent" />
                       </div>
                       <div className="flex-1">
                         <Heading level={3} size="base" className="mb-1">
@@ -419,7 +433,7 @@ export default function ContactPage() {
                 </div>
                 <div className="mt-4 pt-4 border-t border-gray-200">
                   <Text size="sm" color="muted">
-                    For urgent enquiries outside office hours, please email us and we'll respond first thing the next working day.
+                    For urgent enquiries outside office hours, please email us and we&apos;ll respond first thing the next working day.
                   </Text>
                 </div>
               </Card>
@@ -428,7 +442,7 @@ export default function ContactPage() {
               <Card variant="highlighted" className="p-6">
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 p-3 bg-secondary/10 rounded-lg">
-                    <Icon name="alert-circle" size="lg" color="secondary" />
+                    <Icon name="alert-circle" size="lg" color="warning" />
                   </div>
                   <div>
                     <Heading level={3} size="base" className="mb-2">
@@ -440,7 +454,7 @@ export default function ContactPage() {
                     <Button
                       href="tel:+441234567890"
                       variant="secondary"
-                      size="sm"
+                      size="small"
                     >
                       Call Emergency Line
                     </Button>
@@ -460,7 +474,7 @@ export default function ContactPage() {
               Frequently Asked Questions
             </Heading>
             <Text size="lg" color="muted">
-              Quick answers to common questions - can't find what you're looking for? Contact us directly.
+              Quick answers to common questions - can&apos;t find what you&apos;re looking for? Contact us directly.
             </Text>
           </div>
 
@@ -481,7 +495,7 @@ export default function ContactPage() {
             <Text className="mb-4">
               Still have questions?
             </Text>
-            <Button href="tel:+441234567890" variant="outline" size="lg">
+            <Button href="tel:+441234567890" variant="outline" size="large">
               Call Us for Immediate Answers
             </Button>
           </div>
@@ -496,7 +510,7 @@ export default function ContactPage() {
               Find Our Office
             </Heading>
             <Text size="lg" color="muted">
-              Located in the heart of Reading's business district
+              Located in the heart of Reading&apos;s business district
             </Text>
           </div>
 
@@ -504,7 +518,7 @@ export default function ContactPage() {
             <div>
               <Card variant="default" className="p-8 h-full">
                 <div className="flex items-start gap-4 mb-6">
-                  <Icon name="map-pin" size="xl" color="primary" />
+                  <Icon name="map-pin" size="xl" color="accent" />
                   <div>
                     <Heading level={3} size="lg" className="mb-2">
                       Office Address
@@ -542,8 +556,7 @@ export default function ContactPage() {
                   <Button
                     href="https://maps.google.com/?q=123+Business+Park,+Reading,+RG1+2AB"
                     variant="outline"
-                    size="base"
-                    external
+                    size="medium"
                   >
                     Get Directions
                   </Button>

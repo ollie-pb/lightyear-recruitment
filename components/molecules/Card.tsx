@@ -2,10 +2,9 @@ import React, { forwardRef } from 'react'
 import Link from 'next/link'
 import Heading from '../atoms/Heading'
 import Text from '../atoms/Text'
-import Button from '../atoms/Button'
 import Icon from '../atoms/Icon'
 
-export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'content'> {
   variant?: 'default' | 'highlighted' | 'featured' | 'job-listing'
   size?: 'sm' | 'base' | 'lg'
   title?: string
@@ -127,7 +126,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
             <div className="flex-1">
               {icon && (
                 <div className="mb-3">
-                  {React.isValidElement(icon) ? icon : <Icon src={icon as any} size="lg" />}
+                  {React.isValidElement(icon) ? icon : <Icon src={icon as string | React.ComponentType<React.SVGProps<SVGSVGElement>>} size="lg" />}
                 </div>
               )}
               {title && (

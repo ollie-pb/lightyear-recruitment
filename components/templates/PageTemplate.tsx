@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect } from 'react'
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import Header from '../organisms/Header'
 import Footer from '../organisms/Footer'
 import Navigation from '../molecules/Navigation'
@@ -48,7 +48,7 @@ export interface PageTemplateProps extends React.HTMLAttributes<HTMLDivElement> 
   // Analytics
   pageType?: string
   conversionGoals?: string[]
-  trackingData?: Record<string, any>
+  trackingData?: Record<string, string | number | boolean>
   
   // Header/Footer customization
   headerProps?: Partial<HeaderProps>
@@ -92,14 +92,14 @@ const PageTemplate = forwardRef<HTMLDivElement, PageTemplateProps>(
     },
     ref
   ) => {
-    const router = useRouter()
+    const pathname = usePathname()
     const siteName = 'Lightyear Recruitment'
     const baseUrl = 'https://www.lightyear-recruitment.com'
     
     // Default SEO values
     const pageTitle = title ? `${title} | ${siteName}` : siteName
     const pageDescription = description || 'Professional recruitment services specializing in warehouse and logistics roles across Berkshire. Family-run agency helping candidates find their perfect job match.'
-    const pageCanonical = canonicalUrl || `${baseUrl}${router.asPath}`
+    const pageCanonical = canonicalUrl || `${baseUrl}${pathname || ''}`
     
     // Analytics tracking
     useEffect(() => {
@@ -113,10 +113,12 @@ const PageTemplate = forwardRef<HTMLDivElement, PageTemplateProps>(
         
         // Track conversion goals
         conversionGoals.forEach(goal => {
-          window.gtag('event', 'conversion_opportunity', {
-            conversion_goal: goal,
-            page_type: pageType,
-          })
+          if (typeof window.gtag === 'function') {
+            window.gtag('event', 'conversion_opportunity', {
+              conversion_goal: goal,
+              page_type: pageType,
+            })
+          }
         })
       }
     }, [pageTitle, pageCanonical, pageType, trackingData, conversionGoals])
@@ -336,6 +338,6 @@ export default PageTemplate
 // Global type declaration for gtag
 declare global {
   interface Window {
-    gtag?: (...args: any[]) => void
+    gtag?: (...args: unknown[]) => void
   }
 }

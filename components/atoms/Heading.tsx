@@ -28,7 +28,7 @@ const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
     },
     ref
   ) => {
-    const Tag = `h${level}` as keyof JSX.IntrinsicElements
+    const tagName = `h${level}`
 
     const sizeClasses = {
       xs: 'text-xs leading-4',
@@ -59,32 +59,31 @@ const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
       ${className}
     `.replace(/\s+/g, ' ').trim()
 
-    return (
-      <Tag
-        ref={ref}
-        className={baseClasses}
-        onClick={onClick}
-        role={onClick ? 'button' : undefined}
-        tabIndex={onClick ? 0 : undefined}
-        onKeyDown={
-          onClick
-            ? (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  onClick()
-                }
+    return React.createElement(
+      tagName,
+      {
+        ref,
+        className: baseClasses,
+        onClick,
+        role: onClick ? 'button' : undefined,
+        tabIndex: onClick ? 0 : undefined,
+        onKeyDown: onClick
+          ? (e: React.KeyboardEvent) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onClick()
               }
-            : undefined
-        }
-        {...props}
-      >
-        {children}
-        {required && (
-          <span className="ml-1 text-red-500" aria-label="required">
-            *
-          </span>
-        )}
-      </Tag>
+            }
+          : undefined,
+        ...props
+      },
+      children,
+      required && (
+        React.createElement('span', {
+          className: 'ml-1 text-red-500',
+          'aria-label': 'required'
+        }, '*')
+      )
     )
   }
 )

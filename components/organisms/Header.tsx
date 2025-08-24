@@ -1,6 +1,5 @@
 import React, { forwardRef, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 import Heading from '../atoms/Heading'
 import Text from '../atoms/Text'
 import Button from '../atoms/Button'
@@ -82,7 +81,6 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
     },
     ref
   ) => {
-    const router = useRouter()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [mobileSearchOpen, setMobileSearchOpen] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
@@ -163,7 +161,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
               {ctaButton && (
                 <Button
                   variant={ctaButton.variant || 'primary'}
-                  size="base"
+                  size="medium"
                   href={ctaButton.href}
                   onClick={ctaButton.onClick}
                   className="min-h-[44px]"
@@ -333,7 +331,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
               {ctaButton && (
                 <Button
                   variant={ctaButton.variant || 'primary'}
-                  size="base"
+                  size="medium"
                   href={ctaButton.href}
                   onClick={ctaButton.onClick}
                   className={`min-h-[44px] ${variant === 'landing-page' ? 'animate-pulse' : ''}`}
@@ -348,8 +346,8 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
                 {/* Mobile search toggle */}
                 {showSearch && (
                   <Button
-                    variant="ghost"
-                    size="sm"
+                    variant="outline"
+                    size="small"
                     onClick={() => setMobileSearchOpen(!mobileSearchOpen)}
                     aria-label="Toggle search"
                     className="min-h-[44px]"
@@ -362,8 +360,8 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
                 {/* Mobile menu toggle */}
                 {!hideNavigation && navigationItems.length > 0 && (
                   <Button
-                    variant="ghost"
-                    size="sm"
+                    variant="outline"
+                    size="small"
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                     aria-expanded={mobileMenuOpen}
                     aria-controls="mobile-navigation"
@@ -400,7 +398,7 @@ const Header = forwardRef<HTMLElement, HeaderProps>(
                 </div>
                 <Button
                   variant="primary"
-                  size="base"
+                  size="medium"
                   onClick={handleSearchMobile}
                   className="min-h-[44px]"
                   data-testid="mobile-search-submit"

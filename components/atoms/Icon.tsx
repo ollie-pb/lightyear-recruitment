@@ -1,7 +1,7 @@
 import React, { forwardRef, useState, useCallback } from 'react'
 import Image from 'next/image'
 
-export interface IconProps extends React.HTMLAttributes<HTMLElement> {
+export interface IconProps extends React.HTMLAttributes<HTMLDivElement> {
   name?: string
   src?: string | React.ComponentType<React.SVGProps<SVGSVGElement>>
   size?: 'xs' | 'sm' | 'base' | 'lg' | 'xl'
@@ -15,14 +15,14 @@ export interface IconProps extends React.HTMLAttributes<HTMLElement> {
   viewBox?: string
   preserveAspectRatio?: string
   className?: string
-  onClick?: (e: React.MouseEvent<HTMLElement>) => void
+  onClick?: (e: React.MouseEvent<HTMLDivElement>) => void
   'aria-label'?: string
   'aria-labelledby'?: string
   'aria-describedby'?: string
   'data-testid'?: string
 }
 
-const Icon = forwardRef<HTMLElement, IconProps>(
+const Icon = forwardRef<HTMLDivElement, IconProps>(
   (
     {
       name,
@@ -47,7 +47,6 @@ const Icon = forwardRef<HTMLElement, IconProps>(
     ref
   ) => {
     const [imageError, setImageError] = useState(false)
-    const [imageLoading, setImageLoading] = useState(false)
 
     const sizeClasses = {
       xs: 'w-4 h-4', // 16px
@@ -126,7 +125,7 @@ const Icon = forwardRef<HTMLElement, IconProps>(
       ${className}
     `.replace(/\s+/g, ' ').trim()
 
-    const handleClick = useCallback((e: React.MouseEvent<HTMLElement>) => {
+    const handleClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
       if (disabled || loading) {
         e.preventDefault()
         e.stopPropagation()
@@ -135,7 +134,7 @@ const Icon = forwardRef<HTMLElement, IconProps>(
       onClick?.(e)
     }, [disabled, loading, onClick])
 
-    const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLElement>) => {
+    const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
       if (interactive && !disabled && !loading && (e.key === 'Enter' || e.key === ' ')) {
         e.preventDefault()
         const clickEvent = new MouseEvent('click', { bubbles: true, cancelable: true })
@@ -144,14 +143,14 @@ const Icon = forwardRef<HTMLElement, IconProps>(
     }, [interactive, disabled, loading])
 
     const commonProps = {
-      ref: ref as any,
+      ref: ref as React.Ref<HTMLDivElement>,
       className: baseClasses,
       style: transformStyle,
       onClick: interactive ? handleClick : undefined,
       onKeyDown: interactive ? handleKeyDown : undefined,
       tabIndex: interactive && !disabled && !loading ? 0 : undefined,
       role: interactive ? 'button' : undefined,
-      'aria-disabled': disabled ? 'true' : undefined,
+      'aria-disabled': disabled ? true : undefined,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledby,
       'aria-describedby': ariaDescribedby,
@@ -212,10 +211,8 @@ const Icon = forwardRef<HTMLElement, IconProps>(
             width={24}
             height={24}
             className="w-full h-full object-contain"
-            onLoadingComplete={() => setImageLoading(false)}
             onError={() => {
               setImageError(true)
-              setImageLoading(false)
             }}
           />
         </div>

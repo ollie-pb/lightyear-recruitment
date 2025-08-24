@@ -123,10 +123,9 @@ export default function HomePage() {
     >
       {/* Hero Section */}
       <Hero
-        variant="registration-focused"
-        layout="split"
-        title="Find Your Perfect Warehouse Job in Berkshire"
-        subtitle="Family-run recruitment agency with over 40 active roles. Quick placements, personal service, no fees for candidates."
+        layout="with-image"
+        headline="Find Your Perfect Warehouse Job in Berkshire"
+        subheadline="Family-run recruitment agency with over 40 active roles. Quick placements, personal service, no fees for candidates."
         primaryCta={{
           text: 'Register for Jobs',
           href: 'https://registration.recruso.co.uk/Form/Worker/RdcgtU2Ti03C3gbg7Q6uWoxra98ucBoAnSg21MBO',
@@ -145,17 +144,12 @@ export default function HomePage() {
           { label: 'Quick Placement', value: '1-2 Weeks' }
         ]}
         testimonial={{
-          content: 'Found my dream warehouse job in just 5 days. The team really cared about finding the right fit.',
+          text: 'Found my dream warehouse job in just 5 days. The team really cared about finding the right fit.',
           author: 'James Mitchell',
           role: 'Warehouse Team Leader',
-          avatar: '/images/testimonials/james.jpg'
+          company: 'Local Warehouse',
+          image: '/images/testimonials/james.jpg'
         }}
-        trustIndicators={[
-          'Family-Run Since 2010',
-          'Local Berkshire Experts',
-          'No Fees for Candidates',
-          '500+ Successful Placements'
-        ]}
       />
 
       {/* Benefits Section */}
@@ -166,7 +160,7 @@ export default function HomePage() {
               Why Choose Lightyear Recruitment?
             </Heading>
             <Text size="lg" color="muted" className="max-w-3xl mx-auto">
-              We're not just another recruitment agency. As a family-run business, we provide personal service 
+              We&apos;re not just another recruitment agency. As a family-run business, we provide personal service 
               and genuine care for every candidate in the warehouse and logistics sector.
             </Text>
           </div>
@@ -180,7 +174,7 @@ export default function HomePage() {
               >
                 <div className="flex justify-center mb-6">
                   <div className="p-4 bg-primary/10 rounded-full">
-                    <Icon name={benefit.icon as any} size="xl" color="primary" />
+                    <Icon name={benefit.icon as 'users' | 'map-pin' | 'briefcase' | 'clock' | 'shield-check' | 'trending-up'} size="xl" color="accent" />
                   </div>
                 </div>
                 <Heading level={3} size="lg" className="mb-3">
@@ -226,7 +220,7 @@ export default function HomePage() {
                   </div>
                 </div>
                 <Text className="italic">
-                  "{testimonial.content}"
+                  &ldquo;{testimonial.content}&rdquo;
                 </Text>
               </Card>
             ))}
@@ -240,7 +234,7 @@ export default function HomePage() {
             <Button
               href="https://registration.recruso.co.uk/Form/Worker/RdcgtU2Ti03C3gbg7Q6uWoxra98ucBoAnSg21MBO"
               variant="primary"
-              size="lg"
+              size="large"
             >
               Register Today
             </Button>
@@ -260,19 +254,19 @@ export default function HomePage() {
             </Text>
             <div className="flex flex-wrap justify-center gap-6 text-center">
               <div>
-                <Text size="2xl" weight="bold" color="primary" className="block">
+                <Text size="xl" weight="bold" color="accent" className="block">
                   {jobStats.featured}
                 </Text>
                 <Text size="sm" color="muted">Featured Roles</Text>
               </div>
               <div>
-                <Text size="2xl" weight="bold" color="secondary" className="block">
+                <Text size="xl" weight="bold" color="warning" className="block">
                   {jobStats.newThisWeek}
                 </Text>
                 <Text size="sm" color="muted">New This Week</Text>
               </div>
               <div>
-                <Text size="2xl" weight="bold" color="success" className="block">
+                <Text size="xl" weight="bold" color="success" className="block">
                   {jobStats.averageSalary}
                 </Text>
                 <Text size="sm" color="muted">Average Salary</Text>
@@ -330,7 +324,7 @@ export default function HomePage() {
             <Button
               href="/candidates"
               variant="outline"
-              size="lg"
+              size="large"
               className="mr-4"
             >
               View All Jobs
@@ -338,7 +332,7 @@ export default function HomePage() {
             <Button
               href="https://registration.recruso.co.uk/Form/Worker/RdcgtU2Ti03C3gbg7Q6uWoxra98ucBoAnSg21MBO"
               variant="primary"
-              size="lg"
+              size="large"
             >
               Register for Job Alerts
             </Button>
@@ -349,7 +343,7 @@ export default function HomePage() {
       {/* Final CTA Section */}
       <section className="py-16 bg-primary text-white" aria-labelledby="final-cta-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Heading level={2} size="2xl" color="inverse" className="mb-4" id="final-cta-heading">
+          <Heading level={2} size="2xl" className="mb-4 text-white" id="final-cta-heading">
             Ready to Take the Next Step?
           </Heading>
           <Text size="lg" color="inverse" className="mb-8 opacity-90">
@@ -361,14 +355,14 @@ export default function HomePage() {
             <Button
               href="https://registration.recruso.co.uk/Form/Worker/RdcgtU2Ti03C3gbg7Q6uWoxra98ucBoAnSg21MBO"
               variant="secondary"
-              size="lg"
+              size="large"
             >
-              Register Now - It's Free
+              Register Now - It&apos;s Free
             </Button>
             <Button
               href="/contact"
               variant="outline"
-              size="lg"
+              size="large"
               className="border-white text-white hover:bg-white hover:text-primary"
             >
               Speak to Our Team

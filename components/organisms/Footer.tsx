@@ -117,7 +117,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
         await onNewsletterSubmit?.(newsletterEmail)
         setNewsletterStatus('success')
         setNewsletterEmail('')
-      } catch (error) {
+      } catch {
         setNewsletterStatus('error')
         setNewsletterError('Something went wrong. Please try again.')
       }
@@ -190,7 +190,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
               {/* Company Information */}
               <div className="lg:col-span-1">
-                <Heading level={3} size="lg" color="inverse" className="mb-4">
+                <Heading level={3} size="lg" className="mb-4 text-white">
                   {companyName}
                 </Heading>
                 
@@ -243,7 +243,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
                 {/* Social Links */}
                 {socialLinks.length > 0 && (
                   <div data-testid="footer-social-links">
-                    <Text size="sm" weight="medium" color="inverse" className="mb-3">
+                    <Text size="sm" weight="medium" className="mb-3 text-white">
                       Follow Us
                     </Text>
                     <div className="flex gap-3">
@@ -266,7 +266,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
               {/* Navigation Sections */}
               {navigationSections.map((section, index) => (
                 <div key={index} className="lg:col-span-1">
-                  <Heading level={4} size="base" color="inverse" className="mb-4">
+                  <Heading level={4} size="base" className="mb-4 text-white">
                     {section.title}
                   </Heading>
                   <Navigation
@@ -286,12 +286,12 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
                   {showNewsletter && (
                     <div className="mb-8" data-testid="footer-newsletter">
                       <div className="flex items-center justify-between mb-2">
-                        <Heading level={4} size="base" color="inverse">
+                        <Heading level={4} size="base" className="text-white">
                           {newsletterTitle}
                         </Heading>
                         <Button
-                          variant="ghost"
-                          size="sm"
+                          variant="outline"
+                          size="small"
                           onClick={() => setNewsletterCollapsed(!newsletterCollapsed)}
                           aria-expanded={!newsletterCollapsed}
                           className="text-gray-400 hover:text-white lg:hidden"
@@ -323,7 +323,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
                           <Button
                             type="submit"
                             variant="secondary"
-                            size="sm"
+                            size="small"
                             disabled={newsletterStatus === 'submitting'}
                             className="w-full"
                             data-testid="newsletter-submit"
@@ -350,7 +350,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
                   {/* Opening Hours */}
                   {openingHours && openingHours.length > 0 && (
                     <div data-testid="footer-opening-hours">
-                      <Heading level={4} size="base" color="inverse" className="mb-4">
+                      <Heading level={4} size="base" className="mb-4 text-white">
                         Opening Hours
                       </Heading>
                       <div className="space-y-1">
@@ -371,7 +371,7 @@ const Footer = forwardRef<HTMLElement, FooterProps>(
                   <div key={index} className="flex items-center gap-2">
                     {element.icon && (
                       <span className="text-gray-400">
-                        {React.isValidElement(element.icon) ? element.icon : <Icon src={element.icon as any} size="sm" />}
+                        {React.isValidElement(element.icon) ? element.icon : <Icon src={element.icon as string | React.ComponentType<React.SVGProps<SVGSVGElement>>} size="sm" />}
                       </span>
                     )}
                     <Text size="xs" color="muted">

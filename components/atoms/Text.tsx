@@ -36,7 +36,7 @@ const Text = forwardRef<HTMLElement, TextProps>(
     },
     ref
   ) => {
-    const Tag = as as keyof JSX.IntrinsicElements
+    const tagName = as
 
     const sizeClasses = {
       xs: 'text-xs leading-4',
@@ -86,32 +86,31 @@ const Text = forwardRef<HTMLElement, TextProps>(
       ${className}
     `.replace(/\s+/g, ' ').trim()
 
-    return (
-      <Tag
-        ref={ref as any}
-        className={baseClasses}
-        onClick={onClick}
-        role={onClick ? 'button' : undefined}
-        tabIndex={onClick ? 0 : undefined}
-        onKeyDown={
-          onClick
-            ? (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault()
-                  onClick()
-                }
+    return React.createElement(
+      tagName,
+      {
+        ref: ref as React.Ref<HTMLElement>,
+        className: baseClasses,
+        onClick,
+        role: onClick ? 'button' : undefined,
+        tabIndex: onClick ? 0 : undefined,
+        onKeyDown: onClick
+          ? (e: React.KeyboardEvent) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault()
+                onClick()
               }
-            : undefined
-        }
-        {...props}
-      >
-        {children}
-        {required && (
-          <span className="ml-1 text-red-500" aria-label="required">
-            *
-          </span>
-        )}
-      </Tag>
+            }
+          : undefined,
+        ...props
+      },
+      children,
+      required && (
+        React.createElement('span', {
+          className: 'ml-1 text-red-500',
+          'aria-label': 'required'
+        }, '*')
+      )
     )
   }
 )

@@ -168,10 +168,9 @@ export default function AboutPage() {
     >
       {/* Hero Section */}
       <Hero
-        variant="simple"
         layout="centered"
-        title="Our Story: 13 Years of Personal Service"
-        subtitle="Family-run recruitment agency specializing in warehouse and logistics roles across Berkshire. We believe in building relationships, not just filling positions."
+        headline="Our Story: 13 Years of Personal Service"
+        subheadline="Family-run recruitment agency specializing in warehouse and logistics roles across Berkshire. We believe in building relationships, not just filling positions."
         primaryCta={{
           text: 'Meet Our Team',
           href: '#team',
@@ -182,7 +181,10 @@ export default function AboutPage() {
           href: '/contact',
           variant: 'outline'
         }}
-        statistics={achievements}
+        statistics={achievements.map(achievement => ({
+          value: achievement.metric,
+          label: achievement.label
+        }))}
       />
 
       {/* Company Story */}
@@ -193,7 +195,7 @@ export default function AboutPage() {
               The Lightyear Story
             </Heading>
             <Text size="lg" color="muted">
-              How a family business became Berkshire's trusted recruitment partner
+              How a family business became Berkshire&apos;s trusted recruitment partner
             </Text>
           </div>
 
@@ -214,14 +216,14 @@ export default function AboutPage() {
             <Text className="mb-6">
               What started as a husband-and-wife team has grown into a close-knit family business employing 
               dedicated consultants who share our values of personal service, integrity, and community focus. 
-              We've maintained our personal approach while leveraging modern technology to serve our clients 
+              We&apos;ve maintained our personal approach while leveraging modern technology to serve our clients 
               and candidates better.
             </Text>
 
             <Text>
-              Today, we're proud to be known as the go-to recruitment agency for warehouse and logistics 
+              Today, we&apos;re proud to be known as the go-to recruitment agency for warehouse and logistics 
               roles in Berkshire. Our success is measured not just in placements made, but in the lasting 
-              relationships we've built and the positive impact we've had on our community.
+              relationships we&apos;ve built and the positive impact we&apos;ve had on our community.
             </Text>
           </div>
         </div>
@@ -285,7 +287,7 @@ export default function AboutPage() {
                   <Heading level={3} size="lg" className="mb-1">
                     {member.name}
                   </Heading>
-                  <Text color="primary" weight="medium" className="mb-4">
+                  <Text color="accent" weight="medium" className="mb-4">
                     {member.role}
                   </Text>
                 </div>
@@ -332,7 +334,7 @@ export default function AboutPage() {
               <div key={index} className="text-center">
                 <div className="flex justify-center mb-4">
                   <div className="p-4 bg-primary/10 rounded-full">
-                    <Icon name={value.icon as any} size="xl" color="primary" />
+                    <Icon name={value.icon as 'heart' | 'shield-check' | 'users' | 'target' | 'trending-up' | 'clock'} size="xl" color="accent" />
                   </div>
                 </div>
                 <Heading level={3} size="base" className="mb-2">
@@ -356,9 +358,9 @@ export default function AboutPage() {
           
           <div className="bg-primary/5 p-8 rounded-lg">
             <Text size="xl" className="mb-6 italic">
-              "To connect talented individuals with meaningful warehouse and logistics opportunities 
+              &ldquo;To connect talented individuals with meaningful warehouse and logistics opportunities 
               across Berkshire, providing personal service that makes a real difference to careers 
-              and businesses alike."
+              and businesses alike.&rdquo;
             </Text>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
@@ -383,7 +385,7 @@ export default function AboutPage() {
                   For Community
                 </Heading>
                 <Text size="sm" color="muted">
-                  We strengthen the local economy by connecting Berkshire's workforce with local opportunities.
+                  We strengthen the local economy by connecting Berkshire&apos;s workforce with local opportunities.
                 </Text>
               </div>
             </div>
@@ -401,7 +403,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <Card variant="default" className="text-center">
               <div className="mb-4">
-                <Icon name="shield-check" size="2xl" color="primary" />
+                <Icon name="shield-check" size="xl" color="accent" />
               </div>
               <Heading level={3} size="base" className="mb-2">
                 REC Membership
@@ -414,7 +416,7 @@ export default function AboutPage() {
 
             <Card variant="default" className="text-center">
               <div className="mb-4">
-                <Icon name="award" size="2xl" color="primary" />
+                <Icon name="award" size="xl" color="accent" />
               </div>
               <Heading level={3} size="base" className="mb-2">
                 Industry Recognition
@@ -438,19 +440,19 @@ export default function AboutPage() {
       {/* CTA Section */}
       <section className="py-16 bg-primary text-white" aria-labelledby="cta-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Heading level={2} size="2xl" color="inverse" className="mb-4" id="cta-heading">
+          <Heading level={2} size="2xl" className="mb-4" id="cta-heading">
             Ready to Experience Personal Service?
           </Heading>
-          <Text size="lg" color="inverse" className="mb-8 opacity-90">
-            Whether you're looking for your next career move or need help finding the right staff, 
-            we'd love to hear from you. Let's discuss how we can help.
+          <Text size="lg" className="mb-8 opacity-90">
+            Whether you&apos;re looking for your next career move or need help finding the right staff, 
+            we&apos;d love to hear from you. Let&apos;s discuss how we can help.
           </Text>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button href="/candidates" variant="secondary" size="lg">
-              I'm Looking for Work
+            <Button href="/candidates" variant="secondary" size="large">
+              I&apos;m Looking for Work
             </Button>
-            <Button href="/employers" variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-primary">
+            <Button href="/employers" variant="outline" size="large" className="border-white text-white hover:bg-white hover:text-primary">
               I Need to Hire Staff
             </Button>
           </div>

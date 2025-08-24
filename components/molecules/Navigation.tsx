@@ -1,5 +1,5 @@
 import React, { forwardRef, useState } from 'react'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import Link from '../atoms/Link'
 import Button from '../atoms/Button'
 import Icon from '../atoms/Icon'
@@ -40,7 +40,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
     },
     ref
   ) => {
-    const router = useRouter()
+    const pathname = usePathname()
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
     const [dropdownStates, setDropdownStates] = useState<Record<string, boolean>>({})
 
@@ -89,8 +89,8 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
 
     const isActive = (item: NavigationItem) => {
       if (item.active !== undefined) return item.active
-      if (item.href && router) {
-        return router.pathname === item.href
+      if (item.href && pathname) {
+        return pathname === item.href
       }
       return false
     }
@@ -112,7 +112,7 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
         <>
           {showIcons && item.icon && (
             <span className="mr-2 flex-shrink-0">
-              {React.isValidElement(item.icon) ? item.icon : <Icon src={item.icon as any} size="sm" />}
+              {React.isValidElement(item.icon) ? item.icon : <Icon src={item.icon as string | React.ComponentType<React.SVGProps<SVGSVGElement>>} size="sm" />}
             </span>
           )}
           <span className="truncate">{item.label}</span>
@@ -230,8 +230,8 @@ const Navigation = forwardRef<HTMLElement, NavigationProps>(
             {/* Mobile toggle button */}
             <div className="flex items-center justify-between md:hidden">
               <Button
-                variant="ghost"
-                size="sm"
+                variant="outline"
+                size="small"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                 aria-expanded={mobileMenuOpen}
                 aria-controls="mobile-navigation-menu"

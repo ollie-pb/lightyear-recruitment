@@ -104,7 +104,7 @@ const Link = forwardRef<HTMLAnchorElement, LinkProps>(
       className: baseClasses,
       onClick: handleClick,
       tabIndex: disabled ? -1 : undefined,
-      'aria-disabled': disabled ? 'true' : undefined,
+      'aria-disabled': disabled ? true : undefined,
       target: isExternalUrl && !disabled ? target || '_blank' : target,
       rel: isExternalUrl && !disabled ? rel || 'noopener noreferrer' : rel,
       ...props,

@@ -4,7 +4,6 @@ import React from 'react'
 import PageTemplate from '../../components/templates/PageTemplate'
 import Hero from '../../components/organisms/Hero'
 import Card from '../../components/molecules/Card'
-import FormGroup from '../../components/molecules/FormGroup'
 import Heading from '../../components/atoms/Heading'
 import Text from '../../components/atoms/Text'
 import Button from '../../components/atoms/Button'
@@ -159,10 +158,9 @@ export default function CandidatesPage() {
     >
       {/* Hero Section */}
       <Hero
-        variant="simple"
         layout="centered"
-        title="Find Your Perfect Warehouse Job in Berkshire"
-        subtitle="40+ active roles across Reading, Slough, Windsor, and surrounding areas. Quick placements with competitive salaries and excellent benefits."
+        headline="Find Your Perfect Warehouse Job in Berkshire"
+        subheadline="40+ active roles across Reading, Slough, Windsor, and surrounding areas. Quick placements with competitive salaries and excellent benefits."
         primaryCta={{
           text: 'Register for Jobs',
           href: 'https://registration.recruso.co.uk/Form/Worker/RdcgtU2Ti03C3gbg7Q6uWoxra98ucBoAnSg21MBO',
@@ -198,7 +196,7 @@ export default function CandidatesPage() {
               <Card key={index} variant="default" className="h-full">
                 <div className="flex items-start justify-between mb-4">
                   <div className="flex-1">
-                    <Heading level={3} size="lg" className="mb-2">
+                    <Heading level={3} size="xl" className="mb-2">
                       {jobType.title}
                     </Heading>
                     <Text color="success" weight="medium" className="mb-3">
@@ -233,7 +231,7 @@ export default function CandidatesPage() {
             <Button
               href="https://registration.recruso.co.uk/Form/Worker/RdcgtU2Ti03C3gbg7Q6uWoxra98ucBoAnSg21MBO"
               variant="primary"
-              size="lg"
+              size="large"
             >
               Apply for These Roles
             </Button>
@@ -249,7 +247,7 @@ export default function CandidatesPage() {
               Why Work Through Lightyear?
             </Heading>
             <Text size="lg" color="muted">
-              We don't just find you any job – we find you the right job
+              We don&apos;t just find you any job – we find you the right job
             </Text>
           </div>
 
@@ -258,7 +256,7 @@ export default function CandidatesPage() {
               <div key={index} className="text-center">
                 <div className="flex justify-center mb-4">
                   <div className="p-4 bg-primary/10 rounded-full">
-                    <Icon name={benefit.icon as any} size="xl" color="primary" />
+                    <Icon name={benefit.icon as 'shield-check' | 'trending-up' | 'clock' | 'pound-sterling' | 'heart' | 'users'} size="xl" color="accent" />
                   </div>
                 </div>
                 <Heading level={3} size="base" className="mb-2">
@@ -290,11 +288,11 @@ export default function CandidatesPage() {
               <div key={index} className="flex items-start gap-6">
                 <div className="flex-shrink-0">
                   <div className="w-16 h-16 bg-primary text-white rounded-full flex items-center justify-center">
-                    <Icon name={step.icon as any} size="lg" />
+                    <Icon name={step.icon as 'user-plus' | 'phone' | 'search' | 'user-check' | 'briefcase'} size="xl" />
                   </div>
                 </div>
                 <div className="flex-1 pt-2">
-                  <Heading level={3} size="lg" className="mb-2">
+                  <Heading level={3} size="xl" className="mb-2">
                     Step {step.step}: {step.title}
                   </Heading>
                   <Text color="muted">
@@ -312,7 +310,7 @@ export default function CandidatesPage() {
             <Button
               href="https://registration.recruso.co.uk/Form/Worker/RdcgtU2Ti03C3gbg7Q6uWoxra98ucBoAnSg21MBO"
               variant="primary"
-              size="lg"
+              size="large"
             >
               Start Step 1 - Register Now
             </Button>
@@ -334,7 +332,7 @@ export default function CandidatesPage() {
 
           <div className="space-y-8">
             <div>
-              <Heading level={3} size="lg" className="mb-3">
+              <Heading level={3} size="xl" className="mb-3">
                 Do I need experience to apply for warehouse jobs?
               </Heading>
               <Text color="muted">
@@ -344,7 +342,7 @@ export default function CandidatesPage() {
             </div>
 
             <div>
-              <Heading level={3} size="lg" className="mb-3">
+              <Heading level={3} size="xl" className="mb-3">
                 How quickly can you place me in a job?
               </Heading>
               <Text color="muted">
@@ -354,17 +352,17 @@ export default function CandidatesPage() {
             </div>
 
             <div>
-              <Heading level={3} size="lg" className="mb-3">
+              <Heading level={3} size="xl" className="mb-3">
                 Do you charge fees to job seekers?
               </Heading>
               <Text color="muted">
-                Never! Our service is completely free for candidates. We're paid by employers, 
-                so you'll never pay a penny to register or secure a job through us.
+                Never! Our service is completely free for candidates. We&apos;re paid by employers, 
+                so you&apos;ll never pay a penny to register or secure a job through us.
               </Text>
             </div>
 
             <div>
-              <Heading level={3} size="lg" className="mb-3">
+              <Heading level={3} size="xl" className="mb-3">
                 What areas of Berkshire do you cover?
               </Heading>
               <Text color="muted">
@@ -374,7 +372,7 @@ export default function CandidatesPage() {
             </div>
 
             <div>
-              <Heading level={3} size="lg" className="mb-3">
+              <Heading level={3} size="xl" className="mb-3">
                 What if I need a forklift license?
               </Heading>
               <Text color="muted">
@@ -389,10 +387,10 @@ export default function CandidatesPage() {
       {/* Final CTA Section */}
       <section className="py-16 bg-primary text-white" aria-labelledby="final-cta-heading">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Heading level={2} size="2xl" color="inverse" className="mb-4" id="final-cta-heading">
+          <Heading level={2} size="2xl" className="mb-4" id="final-cta-heading">
             Ready to Find Your Perfect Job?
           </Heading>
-          <Text size="lg" color="inverse" className="mb-8 opacity-90">
+          <Text size="lg" className="mb-8 opacity-90">
             Join the hundreds of satisfied candidates who found their ideal warehouse and logistics 
             roles through Lightyear Recruitment. Your perfect job is waiting.
           </Text>
@@ -400,10 +398,10 @@ export default function CandidatesPage() {
           <Button
             href="https://registration.recruso.co.uk/Form/Worker/RdcgtU2Ti03C3gbg7Q6uWoxra98ucBoAnSg21MBO"
             variant="secondary"
-            size="lg"
+            size="large"
             className="mb-6"
           >
-            Register Now - It's Free & Takes 2 Minutes
+            Register Now - It&apos;s Free &amp; Takes 2 Minutes
           </Button>
 
           <div className="flex flex-wrap justify-center gap-8 text-sm opacity-75">

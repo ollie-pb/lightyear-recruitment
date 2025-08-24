@@ -94,12 +94,6 @@ const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
       lg: 'space-y-3',
     }
 
-    const labelSizes = {
-      sm: 'sm' as const,
-      base: 'base' as const,
-      lg: 'lg' as const,
-    }
-
     const helpTextSizes = {
       sm: 'xs' as const,
       base: 'sm' as const,
@@ -123,9 +117,6 @@ const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
         placeholder,
         required,
         disabled: disabled || isPending,
-        error: hasError,
-        size,
-        onChange: handleInputChange,
         onBlur,
         onFocus,
         'aria-describedby': describedBy,
@@ -220,8 +211,10 @@ const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
           type={type}
           value={value as string}
           defaultValue={defaultValue as string}
-          iconBefore={iconBefore}
-          iconAfter={iconAfter}
+          error={typeof error === 'string' ? error : undefined}
+          leftIcon={iconBefore}
+          rightIcon={iconAfter}
+          onChange={(e) => handleInputChange(e.target.value)}
         />
       )
     }
@@ -234,13 +227,12 @@ const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
       >
         {/* Label */}
         {label && (
-          <Text
-            as="label"
+          <label
             htmlFor={fieldId}
-            size={labelSizes[size]}
-            weight="medium"
-            color="default"
-            className="block"
+            className={`
+              block font-medium text-neutral-900
+              ${size === 'sm' ? 'text-sm' : size === 'lg' ? 'text-lg' : 'text-base'}
+            `}
             data-testid={props['data-testid'] ? `${props['data-testid']}-label` : undefined}
           >
             {label}
@@ -249,7 +241,7 @@ const FormGroup = forwardRef<HTMLDivElement, FormGroupProps>(
                 *
               </span>
             )}
-          </Text>
+          </label>
         )}
 
         {/* Input Field */}
